@@ -1,0 +1,43 @@
+﻿<Window x:Class="RandomNumberGame.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RandomNumberGame"
+        mc:Ignorable="d"
+        Title="Random Number Game">
+    <Window.Resources>
+        <local:LengthValueConverter x:Key="lengthConverter"/>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Number:" Margin="5"/>
+            <TextBox x:Name="txtNumber" Width="50" Margin="5" Text="100"/>
+            <TextBlock Text="FontSize:" Margin="5"/>
+            <TextBox x:Name="txtFontSize" Width="50" Margin="5" Text="20"/>
+            <TextBlock Text="PageWidth:" Margin="5"/>
+            <TextBox x:Name="txtPageWidth" Width="50" Margin="5" Text="21cm"/>
+            <TextBlock Text="PageHeight:" Margin="5"/>
+            <TextBox x:Name="txtPageHeight" Width="50" Margin="5" Text="29.7cm"/>
+            <Button Content="Reset" Width="60" Margin="5" Click="ResetClick"/>
+            <Button Content="Generate" Width="60" Margin="5" Click="GenerateClick"/>
+            <Button Content="Print" Width="60" Margin="5" Click="PrintClick"/>
+        </StackPanel>
+        <ScrollViewer Grid.Row="2">
+            <Border BorderBrush="Black" BorderThickness="2"
+                    Width="{Binding ElementName=grid, Path=Width}"
+                    Height="{Binding ElementName=grid, Path=Height}">
+                <Grid x:Name="grid" ShowGridLines="False"
+                  Width="{Binding ElementName=txtPageWidth, Path=Text, Converter={StaticResource lengthConverter}}"
+                  Height="{Binding ElementName=txtPageHeight, Path=Text, Converter={StaticResource lengthConverter}}"
+                  />
+            </Border>
+        </ScrollViewer>
+    </Grid>
+</Window>
